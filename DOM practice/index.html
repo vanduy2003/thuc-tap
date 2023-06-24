@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Su dung AJAX de lay du lieu tu server -->
+    <button id="btnId" onclick="clickMe()">Click me</button>
+    <button id="btnId2" onclick="addPost()">Add post</button>
+    <text id="input"></text>
+    <div class="cards"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function clickMe() {
+            // Get reference to the table body
+            var cards = document.querySelector(".cards");
+            let data;
+            axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
+                if (response.status === 200) {
+                    data = response.data;
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+                data.forEach(function (name) {
+                    var row = document.createElement("div");
+                    row.innerHTML = "<span>" + name.id + "</span><span>." + name.title + "</span><span>" + name.body + "</span>";
+                    if (name.id % 2 !==0){
+                        row.getElementsByTagName('span')[2].style.color = 'red';
+
+                    }
+                    cards.appendChild(row);
+                });
+            });
+        }
+        // list => display, post {}, put: id => thay doi thong tin title, body, delete: id => xoa khoi array
+        // function addPost() {
+        //     var tableBody = document.querySelector("#myTable tbody");
+        //     axios.put("https://jsonplaceholder.typicode.com/posts", {
+        //         id: 111,
+        //         title: "test",
+        //         body: "test body"
+        //     }).then((response) => {
+        //         if (response.status === 201) {
+        //             data = response.data;
+        //             var row = document.createElement("tr");
+        //             row.innerHTML = "<td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td>";
+        //             tableBody.appendChild(row);
+        //         } else {
+        //             console.log('====================================');
+        //             console.log("Them moi khong thanh cong");
+        //             console.log('====================================');
+        //         }
+        //     });
+        // }
+    </script>
+</body>
+
+</html>
