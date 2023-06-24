@@ -1,0 +1,33 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.color {
+    font-weight: 600;
+    color: red;
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.city {
+    font-weight: 600;
+    font-size: 21px;
+    color: rgb(0, 255, 55);
+}
+
+.desc {
+    margin-bottom: 10px;
+}
