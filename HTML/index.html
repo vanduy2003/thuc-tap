@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    
+
+</head>
+<body>
+  
+    <h1>Port and Vessels</h1>
+    <button class="button_click" id="btnId" onclick="clickMe()">click</button>
+    <text id="input"></text>
+    <table id="myTable">
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Country</th>
+            <th>No. of Terminals</th>
+            <th>No. of Berths</th>
+            <th>Emissions rating (from A to F)</th>
+            <th>Vessel calls</th>
+            <th>Tugboat jobs</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function clickMe() {
+            // Get reference to the table body
+            var tableBody = document.querySelector("#myTable tbody");
+            let data;
+            axios.get("https://docs.google.com/spreadsheets/d/1rCoaE4pJ_YqwIxreaiorsXZ-vHpnXIc4ZuTFPQLIM-s/edit#gid=605631722").then((response) => {
+                if (response.status === 200) {
+                    data = response.data;
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+                data.forEach(function (user) {
+                    var row = document.createElement("tr");
+                    row.innerHTML = "<td>" + user.Name + "</td><td>" + user.Description + "</td><td>" + user.Country + "</td><td>" + user.No. of Terminals + "</td><td>" + user.No. of Berths + "</td><td>" + user.Emissions rating (from A to F) + "</td><td>" + user.Vessel call + "</td><td>" + user.Tugboat jobs + "</td>";
+                    tableBody.appendChild(row);
+                });
+            });
+        }
+    </script>
+
+
+</body>
+</html>
