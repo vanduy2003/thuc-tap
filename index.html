@@ -14,19 +14,12 @@
     <button id="btnId" onclick="clickMe()">Click me</button>
     <button id="btnId2" onclick="addPost()">Add post</button>
     <text id="input"></text>
-    <table id="myTable">
-        <thead>
-            <th> Name </th>
-            <th> Age </th>
-            <th> City </th>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="cards"></div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         function clickMe() {
             // Get reference to the table body
-            var tableBody = document.querySelector("#myTable tbody");
+            var cards  = document.querySelector(".cards ");
             let data;
             axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
                 if (response.status === 200) {
@@ -34,16 +27,27 @@
                 } else {
                     document.getElementById('input').innerHTML(response.error);
                 }
-                data.forEach(function (user) {
-                    var row = document.createElement("tr");
-                    row.innerHTML = "<td>" + user.id + "</td><td>" + user.title + "</td><td>" + user.body + "</td>";
-                    tableBody.appendChild(row);
+                data.forEach(function (city) {
+                    var card = document.createElement("div");
+                    card.innerHTML = "<span>" + city.id + "</span><span class= 'title'>" + city.title + "</span><span>" + city.body + "</span>";
+                    cards.appendChild(card);
+                    let div = document.getElementsByTagName("div");
+                    for(let i=0; i<div.length; i++){
+                        if ((i+1) % 2 == 0){
+                        div[i].style.color= "pink";
+
+                    }
+                    else{
+                        div[i].style.color = "black";
+                    }
+                    }
+                
                 });
             });
         }
-        // list => display, post {}, put: id => thay doi thong tin title, body, delete: id => xoa khoi array
+        // list => display, post {}, put: id => thay doi thong tin title, body, delete: id => xoa khoi array 1233
         function addPost() {
-            var tableBody = document.querySelector("#myTable tbody");
+            var cards = document.querySelector(".cards");
             axios.put("https://jsonplaceholder.typicode.com/posts", {
                 id: 111,
                 title: "test",
@@ -51,9 +55,9 @@
             }).then((response) => {
                 if (response.status === 201) {
                     data = response.data;
-                    var row = document.createElement("tr");
-                    row.innerHTML = "<td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td>";
-                    tableBody.appendChild(row);
+                    var card = document.createElement("tr");
+                    card.innerHTML = "<td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td>";
+                    cards.appendChild(card);
                 } else {
                     console.log('====================================');
                     console.log("Them moi khong thanh cong");
@@ -63,5 +67,4 @@
         }
     </script>
 </body>
-
 </html>

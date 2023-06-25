@@ -13,3 +13,10 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+
+
+  div{
+    padding: 10px;
+    margin: 5px;
+    font-size: 15pt;
+  }
