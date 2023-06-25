@@ -1,0 +1,17 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid black;
+}
+.heading {
+  font-weight: bold;
+}
+.cell {
+  flex-basis: 33.33%;
+  padding: 8px;
+}
