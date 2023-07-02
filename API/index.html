@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1" onclick="get()">get</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function get(){
+            let data;
+            axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(function (response) {
+                if (response.status === 200) {
+                    data = response.data;
+                    console.log(data);
+                    
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+            })
+
+        }
+    </script>
+</body>
+</html>

@@ -18,8 +18,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         function clickMe() {
-            // Get reference to the table body
-            var cards = document.querySelector(".cards");
             let data;
             axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
                 if (response.status === 200) {
@@ -27,15 +25,6 @@
                 } else {
                     document.getElementById('input').innerHTML(response.error);
                 }
-                data.forEach(function (name) {
-                    var row = document.createElement("div");
-                    row.innerHTML = "<span>" + name.id + "</span><span>." + name.title + "</span><span>" + name.body + "</span>";
-                    if (name.id % 2 !==0){
-                        row.getElementsByTagName('span')[2].style.color = 'red';
-
-                    }
-                    cards.appendChild(row);
-                });
             });
         }
         // list => display, post {}, put: id => thay doi thong tin title, body, delete: id => xoa khoi array
