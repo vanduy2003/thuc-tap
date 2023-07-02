@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>api</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<body>
+    <!-- Su dung AJAX de lay du lieu tu server -->
+    <button id="btnId" onclick="clickMe()">Click me</button>
+
+    <text id="input"></text>
+    <div id="cards"></div>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        function clickMe() {
+            var Cards = document.querySelector("#cards");
+            let data;
+            axios.get("https://ipinfo.io/161.185.160.93/geo").then((a) => {
+                if (a.status === 200) {
+                    var data = a.data;
+                    data.forEach(function(user) {
+                        var card = document.createElement("div");
+                        card.innerHTML = "<span class = 'number'>" + user.ip + "</span> <div>" + user.city + "</div> <div>" + user.rerion + "</div> <div>" + user.country + "</div><div>" + user.log + "</div> <div class ='desc'>" + user.org + "</div> <div class ='desc'>" + user.podtal + "</div> <div class ='desc'>" + user.time + "</div> <div class ='desc'>" + user.readme + "</div>";
+                        Cards.appendChild(card);
+
+
+                    });
+                } else {
+                    document.getElementById('input').innerHTML = a.error;
+                }
+            });
+
+        }
+    </script>
+
+</body>
+
+
+</html>

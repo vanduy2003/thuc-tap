@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>duy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<body>
+    <!-- Su dung AJAX de lay du lieu tu server -->
+    <button id="btnId" onclick="clickMe()">Click me</button>
+
+    <text id="input"></text>
+    <div id="blocks"></div>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        function clickMe() {
+            var Blocks = document.querySelector("#blocks");
+            let data;
+            axios.get("https://jsonplaceholder.typicode.com/comments").then((response) => {
+                if (response.status === 200) {
+                    var data = response.data;
+                    data.forEach(function(item) {
+                        var block = document.createElement("div");
+                        block.innerHTML = "<span class = 'number'>" + item.id + '.' + "</span><span>" + item.name + "</span><div class = 'email'>" + item.email + "</div><div class ='desc'>" + item.body + "</div>";
+                        Blocks.appendChild(block);
+                        if (item.id % 2 !== 0) {
+                            var mau = block.getElementsByTagName('span');
+                            var mauDiv = block.getElementsByTagName('div');
+
+                            for (var i = 0; i < mau.length; i++) {
+                                mau[i].style.color = 'red';
+                                mau[i].style.fontSize = '25px'
+                                mau[i].style.fontWeight = '600'
+                            }
+                            for (var j = 0; j < mauDiv.length; j++) {
+                                mauDiv[j].style.color = 'red';
+                                mauDiv[j].style.fontSize = '18px';
+                                mauDiv[j].style.color = 'black';
+                            }
+
+                        } else {
+                            var mau = block.getElementsByTagName('span');
+                            var mauDiv = block.getElementsByTagName('div');
+                            for (var i = 0; i < mau.length; i++) {
+                                mau[i].style.color = 'green';
+                                mau[i].style.fontSize = '25px'
+                                mau[i].style.fontWeight = '600'
+                            }
+                            for (var j = 0; j < mauDiv.length; j++) {
+                                mauDiv[j].style.color = 'green';
+                                mauDiv[j].style.fontSize = '18px';
+                                mauDiv[j].style.color = 'black';
+                            }
+                        }
+                    });
+                } else {
+                    document.getElementById('input').innerHTML = a.error;
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        // list => display, post {}, put: id => thay doi thong tin title, body, delete: id => xoa khoi array
+        function addPost() {
+            var tableBody = document.querySelector("#myTable tbody");
+            axios.put("https://jsonplaceholder.typicode.com/posts", {
+                id: 111,
+                title: "test",
+                body: "test body"
+            }).then((response) => {
+                if (response.status === 201) {
+                    data = response.data;
+                    var row = document.createElement("tr");
+                    row.innerHTML = "<td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.body + "</td>";
+                    tableBody.appendChild(row);
+                } else {
+                    console.log('====================================');
+                    console.log("Them moi khong thanh cong");
+                    console.log('====================================');
+                }
+            });
+        }
+    </script>
+
+</body>
+
+
+</html>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="style.csss"> -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
@@ -17,24 +17,26 @@
     <button id="btnId2" onclick="addPost()">Add post</button>
     <text id="input"></text>
     <div id="cards"></div>
-    <div class="bhv"></div>
+
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
     <script type="text/javascript">
         function clickMe() {
             var Cards = document.querySelector("#cards");
-            // Get reference to the table body
-
             let data;
             axios.get("https://jsonplaceholder.typicode.com/posts").then((a) => {
                 if (a.status === 200) {
                     var data = a.data;
                     data.forEach(function(user) {
                         var card = document.createElement("div");
-                        card.innerHTML = "<span class='color'>" + user.id + "</span><span class='city'>" + user.title + "br" + "</span><div class='desc'>" + user.body + "</div>";
+                        card.innerHTML = "<span class = 'number'>" + user.id + "</span><span>" + user.title + "</span><div class ='desc'>" + user.body + "</div>";
                         Cards.appendChild(card);
 
                         if (user.id % 2 !== 0) {
-                            var mau = card.getElementsByTagName('span', 'div');
+                            var mau = card.getElementsByTagName('span');
                             var mauDiv = card.getElementsByTagName('div');
                             for (var i = 0; i < mau.length; i++) {
                                 mau[i].style.color = 'red';
@@ -56,9 +58,6 @@
                                 mauDiv[j].style.fontSize = '18px';
                             }
                         }
-
-
-
                     });
                 } else {
                     document.getElementById('input').innerHTML = a.error;
