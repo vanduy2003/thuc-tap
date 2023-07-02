@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- Su dung AJAX de lay du lieu tu server -->
+    <button id="btnId" onclick="clickMe()">Click me</button>
+    <text id="input"></text>
+    <table id="myTable">
+        <thead>
+            <th> Ordinal number </th>
+            <th> Detail </th>
+            <th> T-F </th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function clickMe() {
+            // Get reference to the table body
+            var tableBody = document.querySelector("#myTable tbody");
+            let data;
+            axios.get("https://jsonplaceholder.typicode.com/todos").then((response) => {
+                if (response.status === 200) {
+                    data = response.data;
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+                data.forEach(function (user) {
+                    var row = document.createElement("tr");
+                    row.innerHTML = "<td>" + user.id + "</td><td>" + user.title + "</td><td>" + user.completed + "</td>";
+                    tableBody.appendChild(row);
+                });
+            });
+        }
+        
+    </script>
+</body>
+
+</html>
