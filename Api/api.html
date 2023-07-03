@@ -1,15 +1,47 @@
 <!DOCTYPE html>
-<html lang = 'en'>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>thuc tap</title>
-        
-        <link href="styles.css" rel="stylesheet"/>
-    </head>
-    </style>
-    <body>
-        <button class="button" id="btnId" onclick="clickMe()">Click</button>
-        <script type="text/javascript" src="api.js"></script>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <button id="btnId" onclick="clickMe()">Click me</button>
+    <text id="input"></text>
+    <table id="myTable">
+        <thead>
+            <th> PostID </th>
+            <th> ID </th>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Body </th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function clickMe() {
+            // Get reference to the table body
+            var tableBody = document.querySelector("#myTable tbody");
+            let data;
+            axios.get("https://jsonplaceholder.typicode.com/comments").then((response) => {
+                if (response.status === 200) {
+                    data = response.data;
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+                data.forEach(function (user) {
+                    var row = document.createElement("tr");
+                    row.innerHTML = "<td>" + user.postId + "</td><td>" + user.id + "</td><td>" + user.name + "</td><td>" + user.email + "</td><td>" + user.body + "</td>";
+                    tableBody.appendChild(row);
+                });
+            });
+        }
+    </script>
+</body>
+
 </html>
