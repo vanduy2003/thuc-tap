@@ -1,7 +1,7 @@
 import axios from "axios";
 
 function clickMe() {
-  axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
+  axios.get("https://jsonplaceholder.typicode.com/todos").then((response) => {
     console.log("====================================");
     console.log(response);
     console.log("====================================");
