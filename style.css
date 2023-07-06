@@ -1,17 +1,37 @@
 .table {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
 }
+
 .row {
-  display: flex;
-  flex-direction: row;
-  border-top: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid black;
 }
+
 .heading {
-  font-weight: bold;
+    font-weight: bold;
 }
+
 .cell {
-  flex-basis: 33.33%;
-  padding: 8px;
+    flex-basis: 33.33%;
+    padding: 8px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
