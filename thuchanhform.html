@@ -3,23 +3,50 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register Form</title>
     <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
 
-    <form>
+    <form id="register-form">
         <label for="email">Email</label><br>
-        <input type="email" id="email" name="Email"><br>
+        <input type="email" id="email" name="email"><br>
         <label for="password">Password</label><br>
         <input type="password" id="password" name="password"><br><br>
-        <label for="password-again">Enter the password again</label><br>
-        <input type="password" name="password-again" id="password-again"><br>
-        <div class="submit"><input type="submit" value="Register"></div>
-
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username"><br><br>
+        <input type="submit" value="Register">
     </form>
+
+    <script>
+        const registerForm = document.querySelector('#register-form');
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const email = document.querySelector('#email').value;
+            const password = document.querySelector('#password').value;
+            const username = document.querySelector('#username').value;
+
+            axios.post('https://funny-movies-server.vercel.app/funny-api/register', {
+                    email,
+                    password,
+                    username
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    alert('Đăng ký thành công!');
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert('Đăng ký thất bại!');
+                });
+        });
+    </script>
+
 </body>
 
 </html>

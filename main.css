@@ -5,7 +5,7 @@ body {
 
 form {
     width: 400px;
-    background-color: rgb(218, 129, 218);
+    background-color: rgb(60, 128, 191);
     padding: 40px;
     border-radius: 70px;
 }
@@ -20,7 +20,8 @@ input {
 }
 
 input[type=email],
-input[type=password] {
+input[type=password],
+input[type=text] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
