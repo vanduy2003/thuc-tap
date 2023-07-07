@@ -1,15 +1,40 @@
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+#registration-form{
+  margin: auto;
+  border: 1px solid #80808000;
+  grid-column: 6/9;
+  grid-row: 3;
+  height: 300px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0px 0px 14px 0px grey;
+  background-color: #fff;
   }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+form {
+  width: 300px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+ 
+  padding: 5px;
+  margin-top: 5px;
+}
+
+input[type="submit"] {
+  padding: 10px;
+  background-color: #05b01f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
