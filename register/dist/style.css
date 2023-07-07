@@ -1,0 +1,49 @@
+*{
+    font-family: arial;
+}
+
+
+
+#rgForm {
+    width: 300px;
+    height: 300px;
+    background-color: #FF9A33;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    margin: 10% 566px 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#rgForm label   {
+    color: white;
+    font-weight: bold;
+    
+    margin-bottom: 10px;
+}
+
+#rgForm input[type="text"],
+#rgForm input[type="email"],
+#rgForm input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#rgForm button[type="submit"] {
+    background-color: #FF8100;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#rgForm button[type="submit"]:hover {
+    background-color: #D97712;
+}
