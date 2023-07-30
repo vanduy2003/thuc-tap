@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="btnGet" onclick="clickMe()">Click me</button><br>
+
+    <input id="employee_name" type= "text" placeholder="Name">
+    <input id="employee_salary" type= "text" placeholder="Salary">
+    <input id="employee_age" type= "text" placeholder="Age">
+    <button id="btnCreate" onclick="Create()">Create</button>
+
+    <input id="updateName" type="text" placeholder="Name">
+    <input id="updateSalary" type="text" placeholder="Salary">
+    <input id="updateAge" type="text" placeholder="Age">
+    <button id="btnUpdate" onclick="Update()">Put</button></br>
+
+    <button id="btnDelete" onclick="Delete()">Delete</button></br>
+    <table id="employeeList">
+        <thead>
+            <th> ID </th>
+            <th> Name </th>
+            <th>Salary</th>
+            <th>Age</th>
+            <th>Image</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        //Get
+        function clickMe() {
+
+
+            axios.get('https://dummy.restapiexample.com/api/v1/employees').then(response => {
+                const data = response.data;
+                const employeeList = document.querySelector('#employeeList tbody');
+                employeeList.innerHTML = '';
+                data.data.forEach(employee => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = "<td>" + employee.id + "</td><td>" + employee.employee_name + "</td><td>" + employee.employee_salary + "</td><td>" + employee.employee_age + "</td><td>" + employee.profile_image + "</td>";
+                    employeeList.appendChild(row);
+                });
+            }).catch(error => console.error(error));
+        }
+
+        //Post
+        function Create() {           
+            const name = document.getElementById('employee_name').value;
+            const salary = document.getElementById('employee_salary').value;
+            const age = document.getElementById('employee_age').value;
+            axios.post("https://dummy.restapiexample.com/api/v1/create", 
+            {
+                employee_name: name,
+                employee_salary: salary,
+                employee_age: age,
+            }).then((response) => {
+                console.log(response);
+                alert('Create successfully!');
+
+            });
+        }
+
+        //Put
+        function Update(){
+            const Name1 = document.getElementById("updateName").value;
+            const Salary1 = document.getElementById("updateSalary").value;
+            const Age1 = document.getElementById("updateAge").value;
+            axios.put("https://dummy.restapiexample.com/api/v1/update/21",{
+                employee_name: Name1,
+                employee_Salary: Salary1,
+                employee_age: Age1,
+            }).then((response) =>{
+                console.log(response)
+                alert('Update successfully!');
+            }).catch((error) =>{
+                console.log(error)
+            })
+
+        }
+
+        //Delete
+        function Delete(){
+            
+            axios.delete(`https://dummy.restapiexample.com/api/v1/delete/2`)
+            .then(response =>{
+                console.log(response);
+                alert('Delete successfully!');
+            })
+            .catch(error =>{
+                console.error(error);
+            });
+
+        }
+    </script>
+</body>
+</html>
