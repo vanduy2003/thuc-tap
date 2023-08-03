@@ -1,0 +1,38 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header{
+    background-color: #9b9090;
+}
+body{
+    height: 100%;
+    width: 100%;
+}
+form {
+    background-color: #9b9090;
+    border-radius: 4px;
+    padding: 20px;
+    width: 300px;
+    margin: 30px auto;
+
+}
+h1{
+    text-align: center;
+    color: black;
+}
+
+input{
+    width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#submit{
+    margin-top: 10px;
+}
+#submit:hover{
+    background-color: dimgray;
+    color: aliceblue;
+}

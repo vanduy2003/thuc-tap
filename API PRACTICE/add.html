@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="form-add">
+        <h1 >Thêm mới</h1>
+        <input id="url" type="text" required><br>
+        <button onclick="add()">Thêm mới</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript">
+            function add(){
+                var url = document.getElementById("url").value;
+                var data = {
+                    url: url,
+                }
+                axios.post('https://funny-movies-server.vercel.app/funny-api/video', data)
+                .then(function(response) {
+                console.log(response.data); 
+                alert('thêm mới thành công');
+                 })
+                .catch(function(error) {
+                console.log(error); 
+                alert('lỗi');
+                });
+            }
+        </script>
+</body>
+</html>
