@@ -1,37 +1,71 @@
-.table {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
 }
 
-.row {
-    display: flex;
-    flex-direction: row;
-    border-top: 1px solid black;
+.employee-card {
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
-.heading {
+.employee-details {
+    margin-top: 10px;
+}
+
+.employee-actions {
+    margin-top: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.popup-content h2 {
+    margin-top: 0;
+}
+
+.popup-content form {
+    display: grid;
+    grid-gap: 10px;
+}
+
+.popup-content label {
     font-weight: bold;
 }
 
-.cell {
-    flex-basis: 33.33%;
-    padding: 8px;
-}
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
+.popup-content input[type="text"] {
     width: 100%;
 }
 
-td,
-th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+.popup-content button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
+.popup-content #submit-btn {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.popup-content #cancel-btn {
+    background-color: #ccc;
 }
