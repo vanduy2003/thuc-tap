@@ -10,38 +10,53 @@
 </head>
 
 <body>
-    <button id="btnId" onclick="showV()">ShowVideo</button>
-    <button id="btnAdd" onclick="add()">AddVideo</button>
+    <button id="btnId" onclick="clickMe()">Click me</button>
+    
     <text id="input"></text>
     <table id="myTable">
         <thead>
-            <th> Id </th>
-            <th> Url </th>
-            <th> VideoId </th>
+            <th> UserId </th>
+            <th> ID </th>
+            <th> Title </th>
+            <th> Complete </th>
         </thead>
         <tbody></tbody>
     </table>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
-        function showV() {
+        function clickMe() {
             // Get reference to the table body
             var tableBody = document.querySelector("#myTable");
             let data;
-            axios.get("https://funny-movies-server.vercel.app/funny-api/videos?fbclid=IwAR3alaQoB13GXnsjapRcqo57998xIA_PEyCxzTE67g7BZHlxUr1Fg4NYXPg").then((response) => {
+            axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
                 if (response.status === 200) {
                     data = response.data;
                 } else {
                     document.getElementById('input').innerHTML(response.error);
                 }
-                data.forEach(function (video) {
+                data.forEach(function (user) {
                     var row = document.createElement("tr");
-                    row.innerHTML = "<p>" + video.id + `</p><iframe width='420' height='345' src="https://www.youtube.com/embed/${video.video_id}"></iframe>`;
+                    row.innerHTML = "<td>" + user.id + "</td><td>" + user.title + "</td><td>" + user.body + `</td><td><button id="${user.id}" onclick='deleteData(${user.id})'>Delete</button></td>`;
                     tableBody.appendChild(row);
                 });
             });
         }
         
-        
+    </script>
+    <script>
+        function deleteData(id){
+            axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+            .then((response) => {
+                if (response.status === 200) {
+                    data = response.data;
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+            })
+            .catch(Error => {
+            alert('Loi!!Khong xoa duoc du lieu');
+            }); 
+        }
     </script>
 </body>
 

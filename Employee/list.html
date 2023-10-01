@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <button id="btnShow" onclick="clickMe()">ShowData</button>
+    <text id="input"></text>
+    <form >
+          <input type="text" id="name" placeholder="Name" />
+          <span></span>
+          <input type="text" id="salary" placeholder="Salary" />
+          <span></span>
+          <input type="text" id="age" placeholder="Age" />
+          <span></span>
+        <button type="button" onclick="updateData()"">Update</button>
+        <button type="button" onclick="createData()">CreateData</button>
+      </form>
+    <table id="myTable">
+        <thead>
+            <th> Id </th>
+            <th> Name </th>
+            <th> Salary </th>
+            <th> Age </th>
+            <th> Profile Image </th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <!-- <div class="popup">
+        <div class="popup-content">
+            <input type="text" id="name" placeholder="Name" />
+            <span></span>
+            <input type="text" id="salary" placeholder="Salary" />
+            <span></span>
+            <input type="text" id="age" placeholder="Age" />
+            <span></span>
+            <button type="button" onclick="update()">Update</button>
+            <button type="button" onclick="closeForm()"">Close</button>
+        </div>
+    </div> -->
+    <script src="list.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function clickMe() {
+            // Get reference to the table body
+            var tableBody = document.querySelector("#myTable tbody");
+            let data;
+            axios.get("https://dummy.restapiexample.com/api/v1/employees").then((response) => {
+                if (response.status === 200) {
+                    data = response.data.data;
+                    console.log(data)
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+                data.forEach(function(employ){
+                    var row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${employ.id}</td>
+                        <td>${employ.employee_name}    </td> 
+                        <td>${employ.employee_salary}  </td>
+                        <td>${employ.employee_age}     </td>
+                        <td>${employ.profile_image}    </td>
+                        <td><button onclick="deleteData(${employ.id})">Delete</button></td>
+                        <td><button onclick='editData(${employ.id})'>Update</button></td>`;
+                    tableBody.appendChild(row);
+                });
+            });
+        }
+    </script>
+    <script>
+        function createData(id){
+
+            const name = document.getElementById('name').value;
+            const salary = document.getElementById('salary').value;
+            const age = document.getElementById('age').value;
+
+            const FormData = {
+                name: name,
+                salary: salary,
+                age: age
+            }
+
+            axios.post(`https://dummy.restapiexample.com/api/v1/create`, FormData)
+             .then(response => {
+                console.log(response);      
+            })
+             .catch(Error => {
+                alert('Khong them duoc du lieu hoac du lieu da ton tai !!');
+            });       
+        }
+    </script>
+
+    <script>
+        function updateData(id){
+            
+            
+            const name = document.getElementById('name').value;
+            const salary = document.getElementById('salary').value;
+            const age = document.getElementById('age').value;
+
+            const FormData = {
+                name: name,
+                salary: salary,
+                age: age
+            }
+            axios.put(`https://dummy.restapiexample.com/api/v1/update/${id}`, FormData)
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    document.getElementById('input').innerHTML(error.error);
+                });
+        
+        }
+
+    </script>
+    <script>
+       function editData(id){
+            axios.get(`https://dummy.restapiexample.com/api/v1/employee/${id}`)
+            .then(response => {
+                const employ = response.data.data;
+                document.getElementById("name").value = employ.employee_name;
+                document.getElementById("salary").value = employ.employee_salary;
+                document.getElementById("age").value = employ.employee_age;
+            }).catch(error => {
+                console.log(error)
+            });
+       }
+    </script>
+    <script>
+        function deleteData(id){
+            axios.delete(`https://dummy.restapiexample.com/api/v1/delete/${id}`)
+            .then((response) => {
+                if (response.status === 200) {
+                    data = response.data;
+                } else {
+                    document.getElementById('input').innerHTML(response.error);
+                }
+            })
+            .catch(Error => {
+            alert('Loi!!Khong xoa duoc du lieu');
+            }); 
+        }
+    </script>
+    
+</body>
+
+</html>
